@@ -14,7 +14,7 @@ $(NAME_SERVER): server.c $(PRINTF)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME_SERVER) server.c -L./Printf -lftprintf
 
 $(NAME_CLIENT): client.c
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME_CLIENT) client.c
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME_CLIENT) client.c -L./Printf -lftprintf
 
 clean:
 	rm -f $(NAME_SERVER) $(NAME_CLIENT)
