@@ -6,7 +6,7 @@
 /*   By: adammour <adammour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 18:52:27 by adammour          #+#    #+#             */
-/*   Updated: 2025/05/24 21:12:27 by adammour         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:24:56 by adammour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -26,15 +26,9 @@ int ft_strlen(char *str)
 	return (i);
 }
 
-void	end_handler(void)
+int	correct_pid(char *str)
 {
-	ft_printf("Message received \n");
-	exit(EXIT_SUCCESS);
-}
-
-int correct_pid(char *str)
-{
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -43,7 +37,7 @@ int correct_pid(char *str)
 			return (0);
 		i++;
 	}
-	return(1);
+	return (1);
 }
 
 void	send_string(pid_t pid, char c)
@@ -62,8 +56,7 @@ void	send_string(pid_t pid, char c)
 			kill(pid, SIGUSR2);
 		else
 			kill(pid, SIGUSR1);
-		usleep(42);
-		
+		usleep(10);
 		i++;
 	}
 }
@@ -82,14 +75,13 @@ int	main(int ac, char **av)
 	i = 0;
 	pid = atoi(av[1]);
 	str = av[2];
-	if (!correct_pid(av[1]) )
+	if (!correct_pid(av[1]))
 	{
 		ft_printf("Error invalid PID\n");
 		return (EXIT_FAILURE);
 	}
 	while (str[i])
 		send_string(pid, str[i++]);
-	end_handler();
 	send_string(pid, '\0');
 	return (EXIT_SUCCESS);
 }
